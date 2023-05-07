@@ -35,11 +35,6 @@ import { useDate, useHandleRoute, usePageConfig } from './hooks'
 
 import layoutBg from '@/assets/images/kpi/bg.png'
 
-// 短标题
-import bg_short from '@/assets/images/kpi/bg_short-title.png'
-// 长标题
-import bg_long from '@/assets/images/kpi/bg_long-title.png'
-
 // 用一个字段控制显示哪些模块
 const showActive = ref('show1')
 
@@ -48,7 +43,7 @@ const { startTime, endTime, getDateRang } = useDate()
 // query 页面跳转 处理点击事件 逻辑----------------
 const { query, getParams } = useHandleRoute()
 // 页面配置信息 --------------------
-const { showMain } = usePageConfig({ bg_short, bg_long })
+const { showMain } = usePageConfig()
 
 provide('$attrs', {
   startTime: readonly(startTime),

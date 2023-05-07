@@ -1,6 +1,11 @@
 import { defineAsyncComponent } from 'vue'
 
-export default function usePageConfig({ bg_long, bg_short }) {
+// 短标题
+import bg_short from '@/assets/images/kpi/bg_short-title.png'
+// 长标题
+import bg_long from '@/assets/images/kpi/bg_long-title.png'
+
+export default function usePageConfig() {
   // 模块常量名称
   // 诉求渠道
   const card1 = 'card1'

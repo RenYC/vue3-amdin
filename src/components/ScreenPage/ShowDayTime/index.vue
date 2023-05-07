@@ -9,16 +9,22 @@
 
 <script setup>
 import dayjs from 'dayjs'
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted, onUnmounted } from 'vue'
 
 // 冒号
 const colon = ref(true)
 // dayjs 获取当前时间
 const dayTime = reactive(getDayTime())
-setInterval(() => {
-  Object.assign(dayTime, getDayTime())
-  colon.value = !colon.value
-}, 1000)
+let timer = null
+onMounted(() => {
+  timer = setInterval(() => {
+    Object.assign(dayTime, getDayTime())
+    colon.value = !colon.value
+  }, 1000)
+})
+onUnmounted(() => {
+  clearInterval(timer)
+})
 
 function getDayTime() {
   return {
