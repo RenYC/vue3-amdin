@@ -7,14 +7,7 @@ const router = createRouter({
       path: '/',
       redirect: '/screenBig',
       name: 'layout',
-      component: () => import('@/components/layout/index.vue'),
-      children: [
-        {
-          path: 'home',
-          name: 'home',
-          component: () => import('@/views/Home.vue')
-        }
-      ]
+      component: () => import('@/views/Home.vue')
     },
     {
       path: '/screenBig',

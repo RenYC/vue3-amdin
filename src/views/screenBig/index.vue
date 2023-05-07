@@ -12,7 +12,7 @@
         :title="item.title"
       >
         <keep-alive>
-          <component :is="item.component"></component>
+          <component class="chart-item" :is="item.component"></component>
         </keep-alive>
       </ScreenCard>
     </template>
@@ -58,4 +58,24 @@ provide('$attrs', {
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.chart-item {
+  width: 100%;
+  height: 100%;
+  /* margin: 0.3125rem; */
+  :deep(.el-loading-mask) {
+    &::after {
+      display: block;
+      content: '';
+      width: 100%;
+      height: 100%;
+      position: relative;
+      top: 0;
+      left: 0;
+      background-color: rgba(6, 42, 101, 0.9);
+      filter: blur(20px);
+      z-index: -1;
+    }
+  }
+}
+</style>
