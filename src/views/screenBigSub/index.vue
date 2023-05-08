@@ -1,9 +1,15 @@
 <template>
-  <ScreenLayout :layoutBg="layoutBg">
-    <router-link class="toPath" to="/screenBig/screenBigSub">下钻二级页面</router-link>
-    <IconBackHome left="8.325rem"></IconBackHome>
-    <ShowDayTime></ShowDayTime>
-    <DateSearch @getDateRang="getDateRang"></DateSearch>
+  <ScreenLayoutSubPage :layoutBg="layoutBg">
+    <template #top-l>
+      <router-link class="toPath" to="/ScreenBig">回到大屏首页</router-link>
+    </template>
+    <template #top-r>
+      <DateSearch type="day" @getDateRang="getDateRang"></DateSearch>
+    </template>
+    <template #BreadcrumbNav>
+      <BreadcrumbNav></BreadcrumbNav>
+    </template>
+
     <template #main>
       <ScreenCard
         v-for="(item, index) in showMain[showActive].list"
@@ -17,14 +23,13 @@
         </keep-alive>
       </ScreenCard>
     </template>
-  </ScreenLayout>
+  </ScreenLayoutSubPage>
 </template>
 
 <script setup>
-import ScreenLayout from '@/components/ScreenPage/ScreenLayout/index.vue'
-import IconBackHome from '@/components/ScreenPage/IconBackHome/index.vue'
-import ShowDayTime from '@/components/ScreenPage/ShowDayTime/index.vue'
+import ScreenLayoutSubPage from '@/components/ScreenPage/ScreenLayoutSubPage/index.vue'
 import DateSearch from '@/components/ScreenPage/DateSearch/index.vue'
+import BreadcrumbNav from '@/components/ScreenPage/BreadcrumbNav/index.vue'
 import ScreenCard from '@/components/ScreenPage/ScreenCard/index.vue'
 
 import { ref, provide, readonly } from 'vue'
@@ -34,10 +39,10 @@ import { useDate, useHandleRoute, usePageConfig } from './hooks'
 // )
 // const ScreenCard = defineAsyncComponent(() => import('@/components/ScreenPage/ScreenCard/index.vue'))
 
-import layoutBg from '@/assets/images/ScreenPage/bg.png'
+import layoutBg from '@/assets/images/ScreenPage/bg_sub.png'
 
 // 用一个字段控制显示哪些模块
-const showActive = ref('show1')
+const showActive = ref('show3')
 
 // 日期逻辑 --------------------
 const { startTime, endTime, getDateRang } = useDate()
@@ -59,9 +64,6 @@ provide('$attrs', {
   width: 100px;
   color: #fff;
   background-color: blueviolet;
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 .chart-item {
   width: 100%;

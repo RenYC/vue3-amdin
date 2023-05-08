@@ -47,7 +47,7 @@ export default function usePageConfig() {
     [card5]: {
       title: '受理量时间趋势',
       width: '5.6rem',
-      bgUrl: bg_short,
+      // bgUrl: bg_short,
       component: defineAsyncComponent(() => import('../components/card5/index.vue'))
     }
   }
@@ -71,6 +71,15 @@ export default function usePageConfig() {
         },
         {
           ...cardConfig[card3]
+        },
+        {
+          ...cardConfig[card2]
+        },
+        {
+          ...cardConfig[card3]
+        },
+        {
+          ...cardConfig[card2]
         }
       ]
     },
@@ -82,6 +91,30 @@ export default function usePageConfig() {
         },
         {
           ...cardConfig[card5]
+        }
+      ]
+    },
+    show3: {
+      type: 'show3',
+      list: [
+        {
+          ...cardConfig[card4]
+        },
+        {
+          ...cardConfig[card5]
+        },
+        {
+          ...cardConfig[card4]
+        },
+        {
+          ...cardConfig[card5]
+        },
+        {
+          ...cardConfig[card4]
+        },
+        {
+          ...cardConfig[card5],
+          width: '17.4rem'
         }
       ]
     }

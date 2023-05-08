@@ -5,14 +5,23 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/screenBig',
-      name: 'layout',
+      redirect: '/home',
+      component: () => import('@/views/Home.vue')
+    },
+    {
+      path: '/home',
+      name: 'home',
       component: () => import('@/views/Home.vue')
     },
     {
       path: '/screenBig',
       name: 'screenBig',
       component: () => import('@/views/screenBig/index.vue')
+    },
+    {
+      path: '/screenBig/screenBigSub',
+      name: 'screenBigSub',
+      component: () => import('@/views/screenBigSub/index.vue')
     }
   ]
 })

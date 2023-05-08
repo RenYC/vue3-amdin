@@ -47,6 +47,7 @@ const props = defineProps({
   position: relative;
   box-sizing: border-box;
   padding: 0.3125rem;
+  margin-bottom: 0.225rem;
 }
 .detault-style {
   border: 1px solid rgba(87, 239, 251, 0.4);

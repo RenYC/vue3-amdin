@@ -1,7 +1,7 @@
 <template>
   <section class="date-search">
     <div
-      v-show="props.type == 'quarter'"
+      v-if="props.type == 'quarter'"
       class="date-radio-wrap"
       :style="{
         width: props.type == 'day' ? '3rem' : '8.95rem'
@@ -12,10 +12,10 @@
     </div>
 
     <div
-      v-show="props.type == 'day'"
+      v-if="props.type == 'day'"
       class="date-radio-wrap wrap2"
       :style="{
-        width: props.width
+        width: props.type == 'day' ? '3rem' : '8.95rem'
       }"
     >
       <DateRadio class="date-radio" :list="dayList" v-model:dateRadio="dateRadio"></DateRadio>
@@ -122,14 +122,6 @@ function emitDateRang() {
     line-height: 0.42rem;
     margin-right: 0.1rem;
   }
-  .wrap2 {
-    margin-top: 0.15rem;
-    .date-radio {
-      &:first-child {
-        margin-bottom: 0;
-      }
-    }
-  }
   .date-radio {
     background: rgba(25, 132, 232, 0.3);
     display: flex;
@@ -138,6 +130,15 @@ function emitDateRang() {
       margin-bottom: 0.075rem;
     }
   }
+  .wrap2 {
+    /* margin-top: 0.15rem; */
+    .date-radio {
+      &:first-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
   .date-range {
     line-height: 0.375rem;
 

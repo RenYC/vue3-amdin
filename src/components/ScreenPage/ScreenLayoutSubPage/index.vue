@@ -5,12 +5,20 @@
       backgroundImage: `url(${props.layoutBg})`
     }"
   >
-    <slot></slot>
-    <section class="main">
+    <div class="layout-top">
+      <div class="top-l">
+        <slot name="top-l"></slot>
+      </div>
+      <h2 class="layout-title">{{ title }}</h2>
+      <div class="date-search">
+        <slot name="top-r"></slot>
+      </div>
+    </div>
+    <div class="breadcrumb-nav-wrap">
+      <slot name="BreadcrumbNav"></slot>
+    </div>
+    <section class="main-wrap">
       <slot name="main"></slot>
-      <!-- <div class="section-row row-1">
-        
-      </div> -->
     </section>
   </div>
 </template>
@@ -20,6 +28,10 @@ const props = defineProps({
   layoutBg: {
     type: String,
     default: ''
+  },
+  title: {
+    type: String,
+    default: '123456·临沂首发 受理分析'
   }
 })
 </script>
@@ -31,19 +43,49 @@ const props = defineProps({
   height: 13.5rem;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 0.425rem 0.3rem 0;
   box-sizing: border-box;
   color: #fff;
   display: flex;
   flex-direction: column;
-  .main {
-    margin-top: 0.175rem;
+  .layout-top {
+    position: relative;
+    height: 0.625rem;
+    line-height: 0.625rem;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.4rem;
+    .top-l,
+    .top-r {
+      width: 6rem;
+    }
+    .layout-title {
+      font-family: SourceHanSansCN-Bold;
+      font-size: 0.3rem;
+      color: #0bf1ff;
+      font-weight: 700;
+      margin: 0;
+      display: inline-block;
+      /* flex: 1; */
+    }
+    .date-search {
+      display: inline-block;
+    }
+  }
+
+  .breadcrumb-nav-wrap {
+    padding: 0 1.8%;
+    margin: 0.25rem 0;
+  }
+
+  .main-wrap {
+    padding: 0 0.3rem;
     display: flex;
     justify-content: space-between;
     align-content: space-between;
     flex-wrap: wrap;
     flex: 1;
-    margin-bottom: 0.3rem;
   }
 }
 </style>
