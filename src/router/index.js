@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { defineAsyncComponent } from 'vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -6,22 +7,30 @@ const router = createRouter({
     {
       path: '/',
       redirect: '/home',
-      component: () => import('@/views/Home.vue')
+      component: defineAsyncComponent(() => import('@/components/layout/index.vue')),
+      children: [
+        {
+          path: '/home',
+          name: 'home',
+          component: defineAsyncComponent(() => import('@/views/Home.vue'))
+        },
+        {
+          path: '/onLineWord',
+          name: 'onLineWord',
+          component: defineAsyncComponent(() => import('@/views/onLineWord/index.vue'))
+        }
+      ]
     },
-    {
-      path: '/home',
-      name: 'home',
-      component: () => import('@/views/Home.vue')
-    },
+
     {
       path: '/screenBig',
       name: 'screenBig',
-      component: () => import('@/views/screenBig/index.vue')
+      component: defineAsyncComponent(() => import('@/views/screenBig/index.vue'))
     },
     {
       path: '/screenBig/screenBigSub',
       name: 'screenBigSub',
-      component: () => import('@/views/screenBigSub/index.vue')
+      component: defineAsyncComponent(() => import('@/views/screenBigSub/index.vue'))
     }
   ]
 })

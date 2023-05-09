@@ -2,6 +2,7 @@
   <ScreenLayoutSubPage :layoutBg="layoutBg">
     <template #top-l>
       <router-link class="toPath" to="/ScreenBig">回到大屏首页</router-link>
+      <button @click="showActive = 'show2'">切换</button>
     </template>
     <template #top-r>
       <DateSearch type="day" @getDateRang="getDateRang"></DateSearch>
@@ -42,12 +43,14 @@ import { useDate, useHandleRoute, usePageConfig } from './hooks'
 import layoutBg from '@/assets/images/ScreenPage/bg_sub.png'
 
 // 用一个字段控制显示哪些模块
-const showActive = ref('show3')
+const showActive = ref('show1')
 
 // 日期逻辑 --------------------
 const { startTime, endTime, getDateRang } = useDate()
+
 // query 页面跳转 处理点击事件 逻辑----------------
 const { query, getParams } = useHandleRoute()
+
 // 页面配置信息 --------------------
 const { showMain } = usePageConfig()
 

@@ -74,12 +74,6 @@ export default function usePageConfig() {
         },
         {
           ...cardConfig[card2]
-        },
-        {
-          ...cardConfig[card3]
-        },
-        {
-          ...cardConfig[card2]
         }
       ]
     },
