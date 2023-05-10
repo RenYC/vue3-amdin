@@ -10,7 +10,7 @@
 import { inject, ref, watch } from 'vue'
 const count = ref(0)
 
-const { startTime, endTime, level, onRouterPush } = inject('$attrs')
+const { startTime, endTime, level, navList, onRouterPush } = inject('$attrs')
 const loading = ref(true)
 watch(
   [startTime, endTime, level],
@@ -18,6 +18,8 @@ watch(
     // 监听数据变化，获取数据
     // console.log(startTime.value)
     // console.log(endTime.value)
+    const params = navList.value[navList.value.length - 1]
+
     setInterval(() => {
       loading.value = false
     }, 0)
@@ -26,11 +28,9 @@ watch(
 )
 
 function onChartClick() {
-  const i = level.value + 1
   onRouterPush({
-    path: '/screenBig/screenBigSub?level=' + i,
     params: {
-      label: '社会事业' + i,
+      label: '社会事业',
       count: '4693',
       code: '社会事业',
       originName: '社会事业',

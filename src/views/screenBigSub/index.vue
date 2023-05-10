@@ -36,11 +36,12 @@ import ScreenCard from '@/components/ScreenPage/ScreenCard/index.vue'
 import { ref, provide, readonly, watch } from 'vue'
 import { useDate, usePageConfig } from './hooks'
 import { useHandleRoute } from '@/components/ScreenPage/hooks'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 import layoutBg from '@/assets/images/ScreenPage/bg_sub.png'
 
 const route = useRoute()
+const router = useRouter()
 
 // 用一个字段控制显示哪些模块
 const levelPage = ref(1)
@@ -58,6 +59,7 @@ provide('$attrs', {
   startTime: readonly(startTime),
   endTime: readonly(endTime),
   level: readonly(level),
+  navList: readonly(navList),
   onRouterPush
 })
 

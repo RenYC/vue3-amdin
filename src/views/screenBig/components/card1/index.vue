@@ -7,8 +7,10 @@
 
 <script setup>
 import { inject, ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
-const { startTime, endTime, onRouterPush } = inject('$attrs')
+const { startTime, endTime, onRouterPush, removeStorage } = inject('$attrs')
 const loading = ref(true)
 watch(
   [startTime, endTime],
@@ -24,8 +26,8 @@ watch(
 )
 
 function onChartClick() {
+  removeStorage()
   onRouterPush({
-    path: '/screenBig/screenBigSub',
     params: {
       label: '直办',
       count: '869618',
@@ -33,6 +35,7 @@ function onChartClick() {
       groupColumn2: 'sllx'
     }
   })
+  router.push('/screenBig/screenBigSub')
 }
 </script>
 

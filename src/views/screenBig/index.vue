@@ -39,7 +39,7 @@ import layoutBg from '@/assets/images/ScreenPage/bg.png'
 // 用一个字段控制显示哪些模块
 const showActive = ref('show1')
 
-const { onRouterPush } = useHandleRoute()
+const { onRouterPush, removeStorage } = useHandleRoute()
 
 // 日期逻辑 --------------------
 const { startTime, endTime, getDateRang } = useDate()
@@ -50,7 +50,8 @@ const { showMain } = usePageConfig()
 provide('$attrs', {
   startTime: readonly(startTime),
   endTime: readonly(endTime),
-  onRouterPush
+  onRouterPush,
+  removeStorage
 })
 </script>
 

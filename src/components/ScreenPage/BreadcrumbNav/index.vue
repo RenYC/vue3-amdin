@@ -9,14 +9,6 @@
       <p class="txt">{{ item.label }}</p>
       <span class="num">{{ item.count }}</span>
     </div>
-    <!-- <div class="item-wrap">
-      <p class="txt">受理总量受理总量受理总量受理总量</p>
-      <span class="num">1334243</span>
-    </div>
-    <div class="item-wrap">
-      <p class="txt">受理总量受理总量受理总量受理总量</p>
-      <span class="num">1334243</span>
-    </div> -->
   </div>
 </template>
 
@@ -33,15 +25,8 @@ const { onRouterPush } = inject('$attrs')
 
 function onNavClick(item, index) {
   onRouterPush({
-    path: '/screenBig/screenBigSub?level=' + index,
-    params: {
-      label: '社会事业' + index,
-      count: '4693',
-      code: '社会事业',
-      originName: '社会事业',
-      groupColumn2: 'wtflfir_name',
-      wtflFlag: '1'
-    }
+    index,
+    params: item
   })
 }
 </script>
