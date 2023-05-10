@@ -2,18 +2,18 @@
   <ScreenLayoutSubPage :layoutBg="layoutBg">
     <template #top-l>
       <router-link class="toPath" to="/ScreenBig">回到大屏首页</router-link>
-      <button @click="showActive = 'show2'">切换</button>
+      <button @click="levelPage = 1">切换</button>
     </template>
     <template #top-r>
       <DateSearch type="day" @getDateRang="getDateRang"></DateSearch>
     </template>
     <template #BreadcrumbNav>
-      <BreadcrumbNav></BreadcrumbNav>
+      <BreadcrumbNav :navList="navList"></BreadcrumbNav>
     </template>
 
     <template #main>
       <ScreenCard
-        v-for="(item, index) in showMain[showActive].list"
+        v-for="(item, index) in showMain[levelPage].list"
         :key="index"
         :width="item.width"
         :bgUrl="item.bgUrl"
@@ -33,23 +33,23 @@ import DateSearch from '@/components/ScreenPage/DateSearch/index.vue'
 import BreadcrumbNav from '@/components/ScreenPage/BreadcrumbNav/index.vue'
 import ScreenCard from '@/components/ScreenPage/ScreenCard/index.vue'
 
-import { ref, provide, readonly } from 'vue'
-import { useDate, useHandleRoute, usePageConfig } from './hooks'
-// const ScreenLayout = defineAsyncComponent(() =>
-//   import('@/components/ScreenPage/ScreenLayout/index.vue')
-// )
-// const ScreenCard = defineAsyncComponent(() => import('@/components/ScreenPage/ScreenCard/index.vue'))
+import { ref, provide, readonly, watch } from 'vue'
+import { useDate, usePageConfig } from './hooks'
+import { useHandleRoute } from '@/components/ScreenPage/hooks'
+import { useRoute } from 'vue-router'
 
 import layoutBg from '@/assets/images/ScreenPage/bg_sub.png'
 
+const route = useRoute()
+
 // 用一个字段控制显示哪些模块
-const showActive = ref('show1')
+const levelPage = ref(1)
 
 // 日期逻辑 --------------------
 const { startTime, endTime, getDateRang } = useDate()
 
 // query 页面跳转 处理点击事件 逻辑----------------
-const { query, getParams } = useHandleRoute()
+const { navList, level, onRouterPush, setDefault } = useHandleRoute()
 
 // 页面配置信息 --------------------
 const { showMain } = usePageConfig()
@@ -57,9 +57,22 @@ const { showMain } = usePageConfig()
 provide('$attrs', {
   startTime: readonly(startTime),
   endTime: readonly(endTime),
-  query: readonly(query),
-  getParams
+  level: readonly(level),
+  onRouterPush
 })
+
+getTotalCount()
+
+// 获取数据总量
+function getTotalCount() {
+  const obj = {
+    label: '受理总量',
+    count: '1334243',
+    groupColumn: 'sllx'
+  }
+
+  setDefault(obj)
+}
 </script>
 
 <style lang="scss" scoped>

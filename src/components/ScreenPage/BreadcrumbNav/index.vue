@@ -1,21 +1,50 @@
 <template>
   <div class="nav-wrap">
-    <div class="item-wrap">
+    <div
+      v-for="(item, index) in props.navList"
+      :key="index"
+      class="item-wrap"
+      @click="onNavClick(item, index)"
+    >
+      <p class="txt">{{ item.label }}</p>
+      <span class="num">{{ item.count }}</span>
+    </div>
+    <!-- <div class="item-wrap">
       <p class="txt">受理总量受理总量受理总量受理总量</p>
       <span class="num">1334243</span>
     </div>
     <div class="item-wrap">
       <p class="txt">受理总量受理总量受理总量受理总量</p>
       <span class="num">1334243</span>
-    </div>
-    <div class="item-wrap">
-      <p class="txt">受理总量受理总量受理总量受理总量</p>
-      <span class="num">1334243</span>
-    </div>
+    </div> -->
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { inject } from 'vue'
+const props = defineProps({
+  navList: {
+    type: Array,
+    default: () => []
+  }
+})
+
+const { onRouterPush } = inject('$attrs')
+
+function onNavClick(item, index) {
+  onRouterPush({
+    path: '/screenBig/screenBigSub?level=' + index,
+    params: {
+      label: '社会事业' + index,
+      count: '4693',
+      code: '社会事业',
+      originName: '社会事业',
+      groupColumn2: 'wtflfir_name',
+      wtflFlag: '1'
+    }
+  })
+}
+</script>
 
 <style lang="scss" scoped>
 .nav-wrap {

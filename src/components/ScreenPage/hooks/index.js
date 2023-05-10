@@ -1,3 +1,4 @@
 import useStore from './useStore'
+import useHandleRoute from './useHandleRoute'
 
-export { useStore }
+export { useStore, useHandleRoute }

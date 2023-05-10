@@ -1,6 +1,5 @@
 <template>
   <ScreenLayout :layoutBg="layoutBg">
-    <router-link class="toPath" to="/screenBig/screenBigSub">下钻二级页面</router-link>
     <IconBackHome left="8.325rem"></IconBackHome>
     <ShowDayTime></ShowDayTime>
     <DateSearch @getDateRang="getDateRang"></DateSearch>
@@ -28,7 +27,8 @@ import DateSearch from '@/components/ScreenPage/DateSearch/index.vue'
 import ScreenCard from '@/components/ScreenPage/ScreenCard/index.vue'
 
 import { ref, provide, readonly } from 'vue'
-import { useDate, useHandleRoute, usePageConfig } from './hooks'
+import { useDate, usePageConfig } from './hooks'
+import { useHandleRoute } from '@/components/ScreenPage/hooks'
 // const ScreenLayout = defineAsyncComponent(() =>
 //   import('@/components/ScreenPage/ScreenLayout/index.vue')
 // )
@@ -39,18 +39,18 @@ import layoutBg from '@/assets/images/ScreenPage/bg.png'
 // 用一个字段控制显示哪些模块
 const showActive = ref('show1')
 
+const { onRouterPush } = useHandleRoute()
+
 // 日期逻辑 --------------------
 const { startTime, endTime, getDateRang } = useDate()
-// query 页面跳转 处理点击事件 逻辑----------------
-const { query, getParams } = useHandleRoute()
+
 // 页面配置信息 --------------------
 const { showMain } = usePageConfig()
 
 provide('$attrs', {
   startTime: readonly(startTime),
   endTime: readonly(endTime),
-  query: readonly(query),
-  getParams
+  onRouterPush
 })
 </script>
 

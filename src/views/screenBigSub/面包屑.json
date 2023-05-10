@@ -1,0 +1,25 @@
+{
+  "menus": [
+    {
+      "label": "受理总量",
+      "count": "1334243",
+      "groupColumn": "sllx"
+    },
+    {
+      "label": "直办",
+      "count": "869618",
+      "code": "1",
+      "groupColumn2": "sllx"
+    },
+    {
+      "label": "社会事业",
+      "count": "4693",
+      "code": "社会事业",
+      "originName": "社会事业",
+      "groupColumn2": "wtflfir_name",
+      "wtflFlag": "1"
+    }
+  ],
+  "startTime": "2023-01-01",
+  "endTime": "2023-05-10"
+}

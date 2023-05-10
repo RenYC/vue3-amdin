@@ -54,8 +54,8 @@ export default function usePageConfig() {
 
   // 展示
   const showMain = {
-    show1: {
-      type: 'show1',
+    1: {
+      type: 1,
       list: [
         {
           ...cardConfig[card1]
@@ -77,8 +77,8 @@ export default function usePageConfig() {
         }
       ]
     },
-    show2: {
-      type: 'show2',
+    2: {
+      type: 2,
       list: [
         {
           ...cardConfig[card4]
@@ -88,8 +88,8 @@ export default function usePageConfig() {
         }
       ]
     },
-    show3: {
-      type: 'show3',
+    3: {
+      type: 3,
       list: [
         {
           ...cardConfig[card4]

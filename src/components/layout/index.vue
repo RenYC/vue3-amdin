@@ -4,12 +4,7 @@
       <el-header>Header</el-header>
       <el-container>
         <el-aside width="200px">
-          <el-menu
-            default-active="2"
-            class="el-menu-vertical-demo"
-            @open="handleOpen"
-            @close="handleClose"
-          >
+          <el-menu default-active="2" class="el-menu-vertical-demo">
             <el-menu-item index="1">
               <router-link to="/">首页</router-link>
             </el-menu-item>
@@ -18,6 +13,9 @@
             </el-menu-item>
             <el-menu-item index="3">
               <router-link to="/onLineWord">在线word</router-link>
+            </el-menu-item>
+            <el-menu-item index="4">
+              <router-link to="/onLineWord2">在线word2</router-link>
             </el-menu-item>
           </el-menu>
         </el-aside>
@@ -35,7 +33,6 @@
 .common-layout {
   height: 100%;
   .el-container {
-    height: 100%;
   }
 }
 .common-layout .el-header {
