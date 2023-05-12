@@ -23,7 +23,8 @@ export default function usePageConfig() {
     [card1]: {
       title: '诉求渠道',
       width: '5.6rem',
-      bgUrl: bg_long,
+      height: '10rem',
+      layout: 'left',
       component: defineAsyncComponent(() => import('../components/card1/index.vue'))
     },
     [card2]: {
@@ -56,30 +57,31 @@ export default function usePageConfig() {
   const showMain = {
     1: {
       type: 1,
-      list: [
+      listL: [
         {
           ...cardConfig[card1]
-        },
+        }
+      ],
+      listR: [
         {
           ...cardConfig[card2]
         },
         {
           ...cardConfig[card3]
-        },
-        {
-          ...cardConfig[card2]
-        },
-        {
-          ...cardConfig[card3]
-        },
-        {
-          ...cardConfig[card2]
         }
       ]
     },
     2: {
       type: 2,
-      list: [
+      listL: [
+        {
+          ...cardConfig[card4]
+        },
+        {
+          ...cardConfig[card5]
+        }
+      ],
+      listR: [
         {
           ...cardConfig[card4]
         },
@@ -90,25 +92,14 @@ export default function usePageConfig() {
     },
     3: {
       type: 3,
-      list: [
+      listL: [
         {
           ...cardConfig[card4]
-        },
-        {
-          ...cardConfig[card5]
-        },
-        {
-          ...cardConfig[card4]
-        },
-        {
-          ...cardConfig[card5]
-        },
+        }
+      ],
+      listR: [
         {
           ...cardConfig[card4]
-        },
-        {
-          ...cardConfig[card5],
-          width: '17.4rem'
         }
       ]
     }

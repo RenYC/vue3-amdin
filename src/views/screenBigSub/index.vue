@@ -12,17 +12,34 @@
     </template>
 
     <template #main>
-      <ScreenCard
-        v-for="(item, index) in showMain[levelPage].list"
-        :key="index"
-        :width="item.width"
-        :bgUrl="item.bgUrl"
-        :title="item.title"
-      >
-        <keep-alive>
-          <component class="chart-item" :is="item.component"></component>
-        </keep-alive>
-      </ScreenCard>
+      <div class="main-left">
+        <ScreenCard
+          v-for="(item, index) in showMain[levelPage].listL"
+          :key="index"
+          :width="'auto'"
+          :bgUrl="item.bgUrl"
+          :title="item.title"
+          :height="'100%'"
+        >
+          <keep-alive>
+            <component class="chart-item" :is="item.component"></component>
+          </keep-alive>
+        </ScreenCard>
+      </div>
+      <div class="main-right">
+        <ScreenCard
+          v-for="(item, index) in showMain[levelPage].listR"
+          :key="index"
+          :width="item.width"
+          :bgUrl="item.bgUrl"
+          :title="item.title"
+          :height="item.height"
+        >
+          <keep-alive>
+            <component class="chart-item" :is="item.component"></component>
+          </keep-alive>
+        </ScreenCard>
+      </div>
     </template>
   </ScreenLayoutSubPage>
 </template>
@@ -82,6 +99,16 @@ function getTotalCount() {
   width: 100px;
   color: #fff;
   background-color: blueviolet;
+}
+.main-left,
+.main-right {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.main-left {
+  padding-right: 0.25rem;
 }
 .chart-item {
   width: 100%;
