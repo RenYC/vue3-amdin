@@ -11,6 +11,9 @@
             <el-menu-item index="2">
               <router-link to="/screenBig">大屏页</router-link>
             </el-menu-item>
+            <el-menu-item index="2-1">
+              <router-link to="/kpi/cross" @click="deltorage">考核交叉</router-link>
+            </el-menu-item>
             <el-menu-item index="3">
               <router-link to="/onLineWord">在线word</router-link>
             </el-menu-item>
@@ -27,7 +30,14 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useHandleRoute } from '@/components/ScreenPage/hooks'
+const { removeStorage } = useHandleRoute()
+
+function deltorage() {
+  removeStorage()
+}
+</script>
 
 <style lang="scss" scoped>
 .common-layout {

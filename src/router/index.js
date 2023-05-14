@@ -36,6 +36,11 @@ const router = createRouter({
       path: '/screenBig/screenBigSub',
       name: 'screenBigSub',
       component: () => import('@/views/screenBigSub/index.vue')
+    },
+    {
+      path: '/kpi/cross',
+      name: 'kpiCross',
+      component: () => import('@/views/kpiCross/index.vue')
     }
   ]
 })

@@ -43,7 +43,7 @@ const props = defineProps({
 .chart-card-box {
   height: 100%;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% 100%;
   position: relative;
   box-sizing: border-box;
   padding: 0.3125rem;

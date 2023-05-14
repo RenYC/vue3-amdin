@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-wrap">
+  <div class="nav-wrap" v-if="props.navList.length >= 2">
     <div
       v-for="(item, index) in props.navList"
       :key="index"

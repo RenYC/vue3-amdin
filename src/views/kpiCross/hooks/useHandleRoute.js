@@ -20,7 +20,7 @@ export default function useHandleRoute() {
   // 追加数据
   function pushStorage(params, index) {
     const paramsList = getStorage()
-    if (index) {
+    if (index !== undefined) {
       paramsList.splice(index)
       navList.value = [navList.value[0], ...paramsList]
     } else {
@@ -39,10 +39,10 @@ export default function useHandleRoute() {
   // 向storage中添加数据
   function onRouterPush({ params, index }) {
     // index是点击某个面包屑才传的，其它情况下不要传。
-    if (index == 0) {
-      router.back()
-      return
-    }
+    // if (index == 0) {
+    //   // router.back()
+    //   return
+    // }
     if (index) {
       level.value = index
     }
