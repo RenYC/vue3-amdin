@@ -2,8 +2,8 @@
   <div class="box">
     <img style="width: 100%; height: 100%" src="./pic.jpg" alt="" />
     <div class="btn-box">
-      <div class="btn-item" @click="onChartClick('办结率')">办结率</div>
-      <div class="btn-item" @click="onChartClick('按时办结率')">按时办结率</div>
+      <div class="btn-item" @click="onChartClick('问题解决数')">{{ type_names.name1 }}</div>
+      <div class="btn-item" @click="onChartClick('问题未解决数')">{{ type_names.name2 }}</div>
     </div>
   </div>
 </template>
@@ -51,12 +51,14 @@ watch(
   { immediate: true }
 )
 
-function onChartClick(val) {
+function onChartClick(is_solving) {
   const params = navList.value[navList.value.length - 1]
   let label = ''
-  let process_index = val
-  if (process_index) {
-    label = val
+  if (is_solving == '问题解决数') {
+    label = '问题解决数'
+  }
+  if (is_solving == '问题未解决数') {
+    label = '问题未解决数'
   }
   onRouterPush({
     params: {
@@ -67,8 +69,7 @@ function onChartClick(val) {
       originName: '兰山区',
       groupColumn2: '兰山区',
       wtflFlag: '1',
-      process_index,
-      typeOrProcess: 'process'
+      is_solving
     }
   })
 }

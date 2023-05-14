@@ -1,14 +1,16 @@
 <template>
-  <div class="nav-wrap" v-if="props.navList.length >= 2">
-    <div
-      v-for="(item, index) in props.navList"
-      :key="index"
-      class="item-wrap"
-      @click="onNavClick(item, index)"
-    >
-      <p class="txt">{{ item.label }}</p>
-      <span class="num">{{ item.count }}</span>
-    </div>
+  <div class="nav-wrap">
+    <template v-if="props.navList.length >= 2">
+      <div
+        v-for="(item, index) in props.navList"
+        :key="index"
+        class="item-wrap"
+        @click="onNavClick(item, index)"
+      >
+        <p class="txt">{{ item.label }}</p>
+        <span class="num">{{ item.count }}</span>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -34,13 +36,13 @@ function onNavClick(item, index) {
 <style lang="scss" scoped>
 .nav-wrap {
   display: flex;
+  height: 0.65rem;
 }
 .item-wrap {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 2.575rem;
-  height: 0.65rem;
   box-sizing: border-box;
   position: relative;
   overflow: hidden;

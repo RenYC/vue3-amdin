@@ -5,11 +5,17 @@
       backgroundImage: `url(${props.layoutBg})`
     }"
   >
-    <div class="layout-top">
+    <div
+      class="layout-top"
+      :style="{
+        height: props.topHeight
+      }"
+    >
       <div class="top-l">
         <slot name="top-l"></slot>
+        <h2 class="layout-title">{{ title }}</h2>
       </div>
-      <h2 class="layout-title">{{ title }}</h2>
+
       <div class="date-search">
         <slot name="top-r"></slot>
       </div>
@@ -32,6 +38,10 @@ const props = defineProps({
   title: {
     type: String,
     default: '123456·临沂首发 受理分析'
+  },
+  topHeight: {
+    type: String,
+    default: '0.625rem'
   }
 })
 </script>
@@ -49,13 +59,13 @@ const props = defineProps({
   flex-direction: column;
   .layout-top {
     position: relative;
-    height: 0.625rem;
-    line-height: 0.625rem;
+    /* height: 0.625rem; */
     text-align: center;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 0.4rem;
+    background: rgba(32, 122, 227, 0.5);
     .top-l,
     .top-r {
       width: 6rem;

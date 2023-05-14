@@ -1,4 +1,4 @@
-import { defineAsyncComponent } from 'vue'
+import { computed, defineAsyncComponent, ref } from 'vue'
 
 import left_1 from '@/assets/images/kpi/左.png'
 import left_2 from '@/assets/images/kpi/三分之一.png'
@@ -10,17 +10,23 @@ export default function usePageConfig() {
   const county = 'county'
   // 县区考核指标
   const kpiIndex = 'kpiIndex'
+  // 县区考核指标
+  const kpiIndex2 = 'kpiIndex2'
   // 县区过程指标
   const processIndex = 'processIndex'
   // 办理问题类别分布
   const issuesType = 'issuesType'
+  // 办理问题类别分布
+  const followData = 'followData'
+
+  const navList = ref([])
 
   // 默认配置信息
   const cardConfig = {
     [county]: {
       title: '承办区县',
       width: '7.5rem',
-      height: 'auto',
+      height: '100%',
       bgUrl: left_1,
       component: defineAsyncComponent(() => import('../components/county/index.vue'))
     },
@@ -29,6 +35,12 @@ export default function usePageConfig() {
       height: '5.5rem',
       bgUrl: right_1,
       component: defineAsyncComponent(() => import('../components/kpiIndex/index.vue'))
+    },
+    [kpiIndex2]: {
+      title: '县区考核指标',
+      height: '5.5rem',
+      bgUrl: right_1,
+      component: defineAsyncComponent(() => import('../components/kpiIndexFull/index.vue'))
     },
     [processIndex]: {
       title: '县区过程指标',
@@ -41,63 +53,185 @@ export default function usePageConfig() {
       height: '5.5rem',
       bgUrl: left_2,
       component: defineAsyncComponent(() => import('../components/issuesType/index.vue'))
+    },
+    [followData]: {
+      title: '关注质效数据',
+      height: '5.5rem',
+      bgUrl: left_2,
+      component: defineAsyncComponent(() => import('../components/followData/index.vue'))
     }
   }
 
-  // 展示
-  const showMain = {
-    1: {
-      type_level: 1,
-      listL: [
+  /**
+   * left
+   * params.county
+   * {
+   *  0: 区县,
+   *
+   * }
+   */
+  const showLeft = computed(() => {
+    const len = navList.value.length - 1
+    const params = navList.value[len]
+    console.log(navList.value[len])
+
+    if (params?.county == '' && params.kpiIndex == 1) {
+      return [
         {
-          ...cardConfig[county]
-        }
-      ],
-      listR: [
-        {
-          ...cardConfig[kpiIndex]
-        },
-        {
-          ...cardConfig[processIndex]
-        }
-      ]
-    },
-    2: {
-      type_level: 2,
-      listL: [
-        {
-          ...cardConfig[county],
-          title: '乡镇/街道',
-          height: '5.5rem',
-          bgUrl: left_2
-        },
-        {
-          ...cardConfig[county],
-          title: '区县单位',
-          height: '5.5rem',
-          bgUrl: left_2
-        }
-      ],
-      listR: [
-        {
-          ...cardConfig[kpiIndex],
-          width: '7.5rem',
-          height: '5.5rem',
-          bgUrl: left_2
-        },
-        {
-          ...cardConfig[issuesType],
-          width: '7.5rem',
-          height: '5.5rem'
-        },
-        {
-          ...cardConfig[processIndex]
+          ...cardConfig[kpiIndex2],
+          width: '23.1rem',
+          height: '11rem'
         }
       ]
     }
+
+    switch (params?.county) {
+      case '区县':
+        return [
+          {
+            ...cardConfig[county]
+          }
+        ]
+      case '乡镇/街道':
+        return [
+          {
+            ...cardConfig[county],
+            height: '5.5rem',
+            title: '乡镇/街道'
+          },
+          {
+            ...cardConfig[county],
+            height: '5.5rem',
+            title: '区县单位'
+          }
+        ]
+      case '村/小区':
+        return [
+          {
+            ...cardConfig[county],
+            title: '村/小区'
+          }
+        ]
+      default:
+        return []
+    }
+  })
+
+  /**
+   * right - top
+   */
+  const showRightTop = computed(() => {
+    const len = navList.value.length - 1
+    const params = navList.value[len]
+    if (params?.county == '' && params.kpiIndex == 1) {
+      return []
+    }
+
+    const temp1 = [
+      {
+        ...cardConfig[kpiIndex]
+      },
+      {
+        ...cardConfig[issuesType]
+      }
+    ]
+    if (params?.typeOrProcess == 'type') {
+      if (
+        params?.type_index == '一次办好率' ||
+        params?.type_index == '问题解决率' ||
+        params?.type_index == '群众满意率'
+      ) {
+        if (params?.is_solving == '问题解决数' || params?.is_solving == '问题未解决数') {
+          return temp1
+        }
+        return [
+          {
+            ...cardConfig[kpiIndex]
+          },
+          {
+            ...cardConfig[followData]
+          }
+        ]
+      }
+    } else {
+      if (params?.process_index) {
+        return temp1
+      }
+    }
+
+    if (params?.county == '区县') {
+      return [
+        {
+          ...cardConfig[kpiIndex]
+        }
+      ]
+    }
+    if (params?.county == '乡镇/街道' || params?.county == '村/小区' || params?.county == '') {
+      return temp1
+    }
+
+    return temp1
+  })
+  /**
+   * right - bottom
+   */
+  const showRightBottom = computed(() => {
+    const len = navList.value.length - 1
+    const params = navList.value[len]
+    if (params?.county == '' && params?.kpiIndex == 1) {
+      return []
+    }
+    if (params?.typeOrProcess == 'type') {
+      if (
+        params?.type_index == '一次办好率' ||
+        params?.type_index == '问题解决率' ||
+        params?.type_index == '群众满意率'
+      ) {
+        if (params?.is_solving == '问题解决数' || params?.is_solving == '问题未解决数') {
+          return [
+            {
+              ...cardConfig[processIndex]
+            }
+          ]
+        }
+        return [
+          {
+            ...cardConfig[processIndex]
+          },
+          {
+            ...cardConfig[issuesType]
+          }
+        ]
+      }
+    } else {
+      if (params?.process_index) {
+        return [
+          {
+            ...cardConfig[processIndex]
+          }
+        ]
+      }
+    }
+
+    return [
+      {
+        ...cardConfig[processIndex]
+      }
+    ]
+  })
+
+  // 展示
+  const showMain = {}
+
+  function setNavList(val) {
+    navList.value = val
   }
 
   return {
-    showMain
+    showLeft,
+    showRightTop,
+    showRightBottom,
+    showMain,
+    setNavList
   }
 }

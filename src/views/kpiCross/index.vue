@@ -1,10 +1,10 @@
 <template>
-  <ScreenLayoutSubPage :layoutBg="layoutBg">
+  <ScreenLayoutSubPage :layoutBg="layoutBg" topHeight="0.9rem">
     <template #top-l>
       <router-link class="toPath" to="/ScreenBig">回到大屏首页</router-link>
     </template>
     <template #top-r>
-      <DateSearch type="day" @getDateRang="getDateRang"></DateSearch>
+      <DateSearch type="quarter" @getDateRang="getDateRang"></DateSearch>
     </template>
     <template #BreadcrumbNav>
       <BreadcrumbNav :navList="navList"></BreadcrumbNav>
@@ -13,31 +13,47 @@
     <template #main>
       <div class="main-left">
         <ScreenCard
-          v-for="(item, index) in showMain[levelPage]?.listL"
+          v-for="(item, index) in showLeft"
           :key="index"
-          :width="item.width"
+          :width="item.width || '100%'"
           :bgUrl="item.bgUrl"
           :title="item.title"
           :height="item.height"
         >
           <keep-alive>
-            <component class="chart-item" :is="item.component"></component>
+            <component class="chart-item" :is="item.component" :title="item.title"></component>
           </keep-alive>
         </ScreenCard>
       </div>
-      <div class="main-right">
-        <ScreenCard
-          v-for="(item, index) in showMain[levelPage]?.listR"
-          :key="index"
-          :width="item.width"
-          :bgUrl="item.bgUrl"
-          :title="item.title"
-          :height="item.height"
-        >
-          <keep-alive>
-            <component class="chart-item" :is="item.component"></component>
-          </keep-alive>
-        </ScreenCard>
+      <div v-show="showRightTop.length && showRightBottom.length" class="main-right">
+        <div class="top">
+          <ScreenCard
+            v-for="(item, index) in showRightTop"
+            :key="index"
+            :width="item.width || '100%'"
+            :bgUrl="item.bgUrl"
+            :title="item.title"
+            :height="item.height || '100%'"
+          >
+            <keep-alive>
+              <component class="chart-item" :is="item.component"></component>
+            </keep-alive>
+          </ScreenCard>
+        </div>
+        <div class="bottom">
+          <ScreenCard
+            v-for="(item, index) in showRightBottom"
+            :key="index"
+            :width="item.width || '100%'"
+            :bgUrl="item.bgUrl"
+            :title="item.title"
+            :height="item.height || '100%'"
+          >
+            <keep-alive>
+              <component class="chart-item" :is="item.component"></component>
+            </keep-alive>
+          </ScreenCard>
+        </div>
       </div>
     </template>
   </ScreenLayoutSubPage>
@@ -63,15 +79,24 @@ const { startTime, endTime, getDateRang } = useDate()
 const { navList, level, onRouterPush, setDefault } = useHandleRoute()
 
 // 页面配置信息 --------------------
-const { showMain } = usePageConfig()
+const { showLeft, showRightTop, showRightBottom, setNavList } = usePageConfig()
 
 const levelPage = ref(level.value)
 
 watch([level], () => {
   console.log(level.value)
   levelPage.value = level.value
-  console.log(showMain[levelPage.value])
 })
+
+watch(
+  [navList],
+  () => {
+    setNavList(navList.value)
+  },
+  {
+    deep: true
+  }
+)
 
 provide('$attrs', {
   startTime: readonly(startTime),
@@ -88,7 +113,8 @@ function getTotalCount() {
   const obj = {
     label: '区县',
     count: '372,707',
-    groupColumn: 'sllx'
+    groupColumn: 'sllx',
+    county: '区县'
   }
 
   setDefault(obj)
@@ -103,7 +129,7 @@ function getTotalCount() {
 }
 
 .main-left {
-  padding-right: 0.25rem;
+  padding-right: 0.3125rem;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -113,9 +139,24 @@ function getTotalCount() {
   flex: 1;
   height: 100%;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: space-between;
+  .top,
+  .bottom {
+    display: flex;
+  }
+  .top > div {
+    flex: 1;
+    & + div {
+      margin-left: 0.3125rem;
+    }
+  }
+  .bottom > div {
+    flex: 1;
+    & + div {
+      margin-left: 0.3125rem;
+    }
+  }
 }
 .chart-item {
   width: 100%;

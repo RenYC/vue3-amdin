@@ -1,12 +1,7 @@
 <template>
   <div v-loading="loading" element-loading-background="rgba(6, 42, 101,0)">
     <!-- <button @click="onChartClick">点击了图表，进行跳转{{ level + 1 }}</button> -->
-    <img
-      style="width: 100%; height: 100%; cursor: pointer"
-      src="./pic.jpg"
-      alt=""
-      @click="onChartClick"
-    />
+    <img style="width: 100%; height: 100%" src="./pic.jpg" alt="" />
   </div>
 </template>
 
