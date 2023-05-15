@@ -60,13 +60,14 @@ function onChartClick(val) {
   }
   onRouterPush({
     params: {
-      ...params,
+      // ...params,
       label: label,
       count: '356,772',
       code: '兰山区',
       originName: '兰山区',
       groupColumn2: '兰山区',
       wtflFlag: '1',
+      county: params.county,
       process_index,
       typeOrProcess: 'process'
     }

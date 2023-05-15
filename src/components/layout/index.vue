@@ -12,7 +12,7 @@
               <router-link to="/screenBig">大屏页</router-link>
             </el-menu-item>
             <el-menu-item index="2-1">
-              <router-link to="/kpi/cross" @click="deltorage">考核交叉</router-link>
+              <router-link to="/kpi/cross" @click="pushCross">考核交叉</router-link>
             </el-menu-item>
             <el-menu-item index="3">
               <router-link to="/onLineWord">在线word</router-link>
@@ -31,11 +31,27 @@
 </template>
 
 <script setup>
-import { useHandleRoute } from '@/components/ScreenPage/hooks'
-const { removeStorage } = useHandleRoute()
+import { useHandleRoute } from '@/views/kpiCross/hooks'
+const { removeStorage, onRouterPush } = useHandleRoute()
+
+function pushCross() {
+  deltorage()
+}
 
 function deltorage() {
   removeStorage()
+
+  // 下钻区县考核指标，或市直部门考核指标
+  const obj = {
+    label: '区县',
+    count: '372,707',
+    groupColumn: 'sllx',
+    county: '区县'
+  }
+
+  onRouterPush({
+    params: obj
+  })
 }
 </script>
 

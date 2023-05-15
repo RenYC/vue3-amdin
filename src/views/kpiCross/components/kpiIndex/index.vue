@@ -4,8 +4,9 @@
       style="width: 100%; height: 100%; cursor: pointer"
       src="./pic.jpg"
       alt=""
-      @click="onChartClick"
+      @click="onChartClick2(1)"
     />
+    <div class="top-box"></div>
     <div class="btn-box">
       <div class="btn-item" @click="onChartClick('一次办好率')">一次办好率</div>
       <div class="btn-item" @click="onChartClick('问题解决率')">问题解决率</div>
@@ -33,6 +34,24 @@ watch(
   { immediate: true }
 )
 
+function onChartClick2(kpiIndex) {
+  const params = navList.value[navList.value.length - 1]
+  let label = '区县考核指标'
+
+  onRouterPush({
+    params: {
+      ...params,
+      label: label,
+      count: '356,772',
+      code: '兰山区',
+      originName: '兰山区',
+      groupColumn2: '兰山区',
+      wtflFlag: '1',
+      kpiIndex
+    }
+  })
+}
+
 function onChartClick(type_index) {
   const params = navList.value[navList.value.length - 1]
   let label = ''
@@ -47,13 +66,14 @@ function onChartClick(type_index) {
   }
   onRouterPush({
     params: {
-      ...params,
+      // ...params,
       label: label,
       count: '356,772',
       code: '兰山区',
       originName: '兰山区',
       groupColumn2: '兰山区',
       wtflFlag: '1',
+      county: params.county,
       type_index,
       typeOrProcess: 'type'
     }
@@ -64,6 +84,16 @@ function onChartClick(type_index) {
 <style lang="scss" scoped>
 .box {
   position: relative;
+  .top-box {
+    height: 50%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
   .btn-box {
     height: 50%;
     width: 100%;

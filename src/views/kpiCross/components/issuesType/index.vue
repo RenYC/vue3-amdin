@@ -25,6 +25,7 @@ watch(
 )
 
 function onChartClick() {
+  const params = navList.value[navList.value.length - 1]
   onRouterPush({
     params: {
       label: '兰山区',
@@ -32,7 +33,8 @@ function onChartClick() {
       code: '兰山区',
       originName: '兰山区',
       groupColumn2: '兰山区',
-      wtflFlag: '1'
+      wtflFlag: '1',
+      county: params.county
     }
   })
 }
