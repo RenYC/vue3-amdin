@@ -20,6 +20,9 @@
             <el-menu-item index="4">
               <router-link to="/onLineWord2">在线word2</router-link>
             </el-menu-item>
+            <el-menu-item index="5">
+              <router-link to="/reports">报告生成</router-link>
+            </el-menu-item>
           </el-menu>
         </el-aside>
         <el-main>
