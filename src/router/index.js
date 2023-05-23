@@ -23,6 +23,11 @@ const router = createRouter({
           path: '/onLineWord2',
           name: 'onLineWord2',
           component: () => import('@/views/onLineWord2/index.vue')
+        },
+        {
+          path: '/drag',
+          name: 'drag',
+          component: () => import('@/views/drag/index.vue')
         }
       ]
     },
