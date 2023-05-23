@@ -69,6 +69,7 @@ export default function usePageConfig() {
    *  0: 区县,
    *
    * }
+   * kpiIndex 表示是否下钻到了最后两级，页面只剩区县考核指标这一个panel
    */
   const showLeft = computed(() => {
     const len = navList.value.length - 1
@@ -123,7 +124,8 @@ export default function usePageConfig() {
   const showRightTop = computed(() => {
     const len = navList.value.length - 1
     const params = navList.value[len]
-    if (params?.county == '' && params.kpiIndex == 1) {
+    console.log(params)
+    if (params?.county == '' && params?.kpiIndex == 1) {
       return []
     }
 

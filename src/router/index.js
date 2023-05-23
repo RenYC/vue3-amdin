@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { defineAsyncComponent } from 'vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +27,11 @@ const router = createRouter({
           path: '/drag',
           name: 'drag',
           component: () => import('@/views/drag/index.vue')
+        },
+        {
+          path: '/reports',
+          name: 'reports',
+          component: () => import('@/views/reports/index.vue')
         }
       ]
     },

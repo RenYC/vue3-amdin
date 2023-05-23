@@ -65,7 +65,7 @@ const props = defineProps({
     justify-content: space-between;
     align-items: center;
     padding: 0 0.4rem;
-    background: rgba(32, 122, 227, 0.5);
+    /* background: rgba(32, 122, 227, 0.5); */
     .top-l,
     .top-r {
       width: 6rem;

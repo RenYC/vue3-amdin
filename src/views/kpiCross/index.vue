@@ -1,7 +1,7 @@
 <template>
   <ScreenLayoutSubPage :layoutBg="layoutBg" topHeight="0.9rem">
     <template #top-l>
-      <router-link class="toPath" to="/ScreenBig">回到大屏首页</router-link>
+      <router-link class="toPath" to="/home" @click="toPath">回到首页</router-link>
     </template>
     <template #top-r>
       <DateSearch type="quarter" @getDateRang="getDateRang"></DateSearch>
@@ -68,7 +68,7 @@ import ScreenCard from '@/components/ScreenPage/ScreenCard/index.vue'
 import { ref, provide, readonly, watch } from 'vue'
 import { useDate, usePageConfig, useHandleRoute } from './hooks'
 
-import layoutBg from '@/assets/images/ScreenPage/bg_sub.png'
+import layoutBg from '@/assets/images/kpi/bg.png'
 
 // 用一个字段控制显示哪些模块
 
@@ -76,7 +76,7 @@ import layoutBg from '@/assets/images/ScreenPage/bg_sub.png'
 const { startTime, endTime, getDateRang } = useDate()
 
 // query 页面跳转 处理点击事件 逻辑----------------
-const { navList, level, onRouterPush, setDefault } = useHandleRoute()
+const { navList, level, onRouterPush, setDefault, removeStorage } = useHandleRoute()
 
 // 页面配置信息 --------------------
 const { showLeft, showRightTop, showRightBottom, setNavList } = usePageConfig()
@@ -106,18 +106,32 @@ provide('$attrs', {
   onRouterPush
 })
 
+function toPath() {
+  removeStorage()
+}
+
 getTotalCount()
 
 // 获取数据总量
 function getTotalCount() {
-  const obj = {
-    label: '区县',
-    count: '372,707',
+  const total = {
+    label: '受理总量',
+    count: '9372,707',
     groupColumn: 'sllx',
     county: '区县'
   }
+  // const obj = {
+  //   label: '区县',
+  //   count: '372,707',
+  //   groupColumn: 'sllx',
+  //   county: '区县'
+  // }
 
-  setDefault(obj)
+  setDefault(total)
+
+  // onRouterPush({
+  //   params: obj
+  // })
 }
 </script>
 
