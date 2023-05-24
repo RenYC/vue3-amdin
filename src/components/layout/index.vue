@@ -31,9 +31,6 @@
                 <router-link to="/rich/echarts">echarts</router-link>
               </el-menu-item>
             </el-sub-menu>
-            <el-menu-item index="5">
-              <router-link to="/reports">报告生成</router-link>
-            </el-menu-item>
             <el-menu-item index="6">
               <router-link to="/drag">拖拽</router-link>
             </el-menu-item>

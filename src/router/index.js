@@ -29,7 +29,7 @@ const router = createRouter({
           component: () => import('@/views/drag/index.vue')
         },
         {
-          path: '/reports',
+          path: '/rich/reports',
           name: 'reports',
           component: () => import('@/views/rich/reports/index.vue')
         },
