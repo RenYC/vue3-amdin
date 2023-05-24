@@ -156,8 +156,23 @@ export default function usePageConfig() {
         ]
       }
     } else {
+      // process_index 下面同步修改
       if (params?.process_index) {
-        return temp1
+        if (params?.label.includes('数') || params?.label.includes('量')) {
+          return [
+            {
+              ...cardConfig[processIndex]
+            }
+          ]
+        }
+        return [
+          {
+            ...cardConfig[kpiIndex]
+          },
+          {
+            ...cardConfig[followData]
+          }
+        ]
       }
     }
 
@@ -206,10 +221,21 @@ export default function usePageConfig() {
         ]
       }
     } else {
+      // process_index 上面同步修改
       if (params?.process_index) {
+        if (params?.label.includes('数') || params?.label.includes('量')) {
+          return [
+            {
+              ...cardConfig[processIndex]
+            }
+          ]
+        }
         return [
           {
             ...cardConfig[processIndex]
+          },
+          {
+            ...cardConfig[issuesType]
           }
         ]
       }

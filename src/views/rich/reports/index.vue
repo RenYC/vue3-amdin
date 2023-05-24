@@ -38,36 +38,35 @@ onMounted(() => {
 
     setTimeout(() => {
       // const editor = document.getElementById('w-e-textarea-2')
-
       // const div = document.createElement('div')
       // div.innerHTML = '<p>div div</p>'
       // console.log(editor)
       // editor.appendChild(div)
-      editorRef.value.dangerouslyInsertHtml('<h1 id="999">标题</h1><p>文本 <b>加粗</b></p>')
+      // editorRef.value.dangerouslyInsertHtml('<h1 id="999">标题</h1><p>文本 <b>加粗</b></p>')
     }, 100)
 
-    // const url = 'https://fanyi-cdn.cdn.bcebos.com/static/translation/img/header/logo_e835568.png'
-    // urlToBase64(url)
-    //   .then((base64) => {
-    //     // 在这里可以使用 Base64 编码的内容进行其他操作
-    //     const node = {
-    //       type: 'image',
-    //       id: 'echarts',
-    //       src: base64,
-    //       children: [{ text: '' }]
-    //     }
-    //     // editorRef.value.insertNode(node)
+    const url = 'https://fanyi-cdn.cdn.bcebos.com/static/translation/img/header/logo_e835568.png'
+    urlToBase64(url)
+      .then((base64) => {
+        // 在这里可以使用 Base64 编码的内容进行其他操作
+        const node = {
+          type: 'image',
+          id: 'echarts',
+          src: base64,
+          children: [{ text: '' }]
+        }
+        editorRef.value.insertNode(node)
 
-    //     const node1 = { type: 'paragraph', id: 10, children: [{ text: 'aaa' }] }
-    //     const node2 = { type: 'paragraph', children: [{ text: 'bbb' }] }
-    //     const at = { at: [editorRef.value.children.length] }
-    //     const nodeList = [node1, node2, node]
+        const node1 = { type: 'paragraph', id: 10, children: [{ text: 'aaa' }] }
+        const node2 = { type: 'paragraph', children: [{ text: 'bbb' }] }
+        const at = { at: [editorRef.value.children.length] }
+        const nodeList = [node1, node2, node]
 
-    //     SlateTransforms.insertNodes(editorRef.value, nodeList, at)
-    //   })
-    //   .catch((error) => {
-    //     console.error('转换出错：', error)
-    //   })
+        SlateTransforms.insertNodes(editorRef.value, nodeList, at)
+      })
+      .catch((error) => {
+        console.error('转换出错：', error)
+      })
   }, 1500)
 })
 

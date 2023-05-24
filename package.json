@@ -15,6 +15,7 @@
     "@wangeditor/editor-for-vue": "^5.1.12",
     "dayjs": "^1.11.7",
     "default-passive-events": "^2.0.0",
+    "echarts": "^5.4.2",
     "element-plus": "^2.3.3",
     "normalize": "^0.3.1",
     "normalize.css": "^8.0.1",

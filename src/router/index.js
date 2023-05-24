@@ -25,9 +25,14 @@ const router = createRouter({
           component: () => import('@/views/onLineWord2/index.vue')
         },
         {
-          path: '/reports',
+          path: '/rich/reports',
           name: 'reports',
-          component: () => import('@/views/reports/index.vue')
+          component: () => import('@/views/rich/reports/index.vue')
+        },
+        {
+          path: '/rich/echarts',
+          name: 'echarts',
+          component: () => import('@/views/rich/echarts/index.vue')
         }
       ]
     },

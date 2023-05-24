@@ -4,7 +4,7 @@
       <el-header>Header</el-header>
       <el-container>
         <el-aside width="200px">
-          <el-menu default-active="2" class="el-menu-vertical-demo">
+          <el-menu default-active="2" class="el-menu-vertical-demo" :default-openeds="['5']">
             <el-menu-item index="1">
               <router-link to="/">首页</router-link>
             </el-menu-item>
@@ -20,9 +20,17 @@
             <el-menu-item index="4">
               <router-link to="/onLineWord2">在线word2</router-link>
             </el-menu-item>
-            <el-menu-item index="5">
-              <router-link to="/reports">报告生成</router-link>
-            </el-menu-item>
+            <el-sub-menu index="5">
+              <template #title>
+                <span>富文本</span>
+              </template>
+              <el-menu-item index="5-1">
+                <router-link to="/rich/reports">wangeditor</router-link>
+              </el-menu-item>
+              <el-menu-item index="5-2">
+                <router-link to="/rich/echarts">echarts</router-link>
+              </el-menu-item>
+            </el-sub-menu>
           </el-menu>
         </el-aside>
         <el-main>
