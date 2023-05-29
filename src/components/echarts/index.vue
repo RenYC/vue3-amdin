@@ -39,6 +39,10 @@ onMounted(() => {
 onUnmounted(() => {
   myChart.value.dispose()
 })
+
+defineExpose({
+  myChart: myChart
+})
 </script>
 
 <style lang="scss" scoped>

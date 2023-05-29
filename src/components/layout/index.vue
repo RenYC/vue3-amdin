@@ -30,6 +30,12 @@
               <el-menu-item index="5-2">
                 <router-link to="/rich/echarts">echarts</router-link>
               </el-menu-item>
+              <el-menu-item index="5-3">
+                <router-link to="/rich/quillEditor">quillEditor</router-link>
+              </el-menu-item>
+              <el-menu-item index="5-4">
+                <router-link to="/rich/quillEditor2">quillEditor2</router-link>
+              </el-menu-item>
             </el-sub-menu>
             <el-menu-item index="6">
               <router-link to="/drag">拖拽</router-link>

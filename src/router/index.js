@@ -1,7 +1,7 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',
@@ -37,6 +37,16 @@ const router = createRouter({
           path: '/rich/echarts',
           name: 'echarts',
           component: () => import('@/views/rich/echarts/index.vue')
+        },
+        {
+          path: '/rich/quillEditor',
+          name: 'quillEditor',
+          component: () => import('@/views/rich/quillEditor/index.vue')
+        },
+        {
+          path: '/rich/quillEditor2',
+          name: 'quillEditor2',
+          component: () => import('@/views/rich/quillEditor/index2.vue')
         }
       ]
     },

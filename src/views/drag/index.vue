@@ -29,7 +29,7 @@ onMounted(() => {
     e.preventDefault()
   }
   container.value.ondragenter = function (e) {
-    // console.log('enter', e)
+    // console.log('enter', e.target)
     // 拖动到了哪个元素，目标节点
     const dropNode = e.target
 
@@ -37,7 +37,6 @@ onMounted(() => {
       // 如果相等，该节点能够接受目前拖拽的节点
       // dropNode 进入了哪里
       // e.dataTransfer.effectAllowe 当前拖拽元素
-
       dropNode.classList.add('drop-over')
     }
   }
