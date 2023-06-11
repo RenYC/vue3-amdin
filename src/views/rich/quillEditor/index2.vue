@@ -4,13 +4,13 @@
       <button id="image-button" @click="imgBtn">99</button>
     </div> -->
     <div id="toolbar">
-      <toolbar></toolbar>
-      <span class="ql-formats">
+      <toolbar :sizeList="sizeList" :align="align"></toolbar>
+      <!-- <span class="ql-formats">
         <button class="ql-custom-button">添加模板</button>
-      </span>
+      </span> -->
     </div>
     <div id="editor"></div>
-    <div class="drag-box">拖拽左侧图表到这里</div>
+    <!-- <div class="drag-box">拖拽左侧图表到这里</div> -->
   </div>
 </template>
 
@@ -19,6 +19,14 @@ import toolbar from './toobar.vue'
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
 import { ref, onMounted } from 'vue'
+import { sizeList } from './config'
+
+const align = ref([
+  { value: 'left', label: '左对齐' },
+  { value: 'center', label: '居中' },
+  { value: 'right', label: '右对齐' },
+  { value: 'justify', label: '两端对齐' }
+])
 
 let quill = null
 let BlockEmbed = Quill.import('blots/block/embed')
@@ -40,7 +48,7 @@ class ImageBlot extends BlockEmbed {
 }
 ImageBlot.blotName = 'image'
 ImageBlot.tagName = 'img'
-Quill.register(ImageBlot)
+// Quill.register(ImageBlot)
 
 const options = {
   // debug: 'info',
@@ -78,6 +86,10 @@ const options = {
 onMounted(() => {
   quill = new Quill('#editor', options)
 })
+
+const SizeStyle = Quill.import('attributors/style/size')
+SizeStyle.whitelist = sizeList.map((item) => item.pixelValue)
+Quill.register(SizeStyle, true)
 
 function imgBtn() {
   let range = quill.getSelection(true)

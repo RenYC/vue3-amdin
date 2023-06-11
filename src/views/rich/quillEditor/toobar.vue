@@ -24,20 +24,27 @@
   <!-- 对齐方式 -->
   <span class="ql-formats">
     <select class="ql-align">
-      <option selected></option>
-      <option value="center"></option>
-      <option value="right"></option>
-      <option value="justify"></option>
+      <option
+        v-for="item in props.align"
+        :key="item.pixelValue"
+        :value="item.pixelValue"
+        :selected="item.selected"
+      >
+        {{ item.label }}
+      </option>
     </select>
   </span>
   <!-- 字体大小 -->
   <span class="ql-formats">
     <select class="ql-size">
-      <option value="small"></option>
-      <!-- Note a missing, thus falsy value, is used to reset to default -->
-      <option selected></option>
-      <option value="large"></option>
-      <option value="huge"></option>
+      <option
+        v-for="item in props.sizeList"
+        :key="item.pixelValue"
+        :value="item.pixelValue"
+        :selected="item.selected"
+      >
+        {{ item.label }}
+      </option>
     </select>
   </span>
   <!--  标题 -->
@@ -95,6 +102,16 @@
 
 <script setup>
 import { ref } from 'vue'
+const props = defineProps({
+  sizeList: {
+    type: Array,
+    default: () => []
+  },
+  align: {
+    type: Array,
+    default: () => []
+  }
+})
 const color = ref([
   '#e60000',
   '#ff9900',
